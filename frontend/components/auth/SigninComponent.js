@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { signin, authenticate, isAuth } from '../../actions/auth';
 import Router from 'next/router';
+import Link from 'next/link';
+import LoginGoogle from './LoginGoogle';
 
 const SigninComponent = () => {
     const [values, setValues] = useState({
@@ -15,7 +17,7 @@ const SigninComponent = () => {
     const { email, password, error, loading, message, showForm } = values;
 
     useEffect(() => {
-        isAuth() &&Router.push('/');
+        isAuth() && Router.push(`/`);
     }, []);
 
     const handleSubmit = e => {
@@ -32,7 +34,7 @@ const SigninComponent = () => {
                 // save user info to localstorage
                 // authenticate user
                 authenticate(data, () => {
-                    if(isAuth() && isAuth().role === 1){
+                    if (isAuth() && isAuth().role === 1) {
                         Router.push(`/admin`);
                     } else {
                         Router.push(`/user`);
@@ -74,7 +76,7 @@ const SigninComponent = () => {
                 </div>
 
                 <div>
-                    <button className="btn btn-primary">SignIn</button>
+                    <button className="btn btn-primary">Signin</button>
                 </div>
             </form>
         );
@@ -85,7 +87,12 @@ const SigninComponent = () => {
             {showError()}
             {showLoading()}
             {showMessage()}
+            <LoginGoogle />
             {showForm && signinForm()}
+            <br />
+            <Link href="/auth/password/forgot">
+                <a className="btn btn-outline-danger btn-sm">Forgot password</a>
+            </Link>
         </React.Fragment>
     );
 };

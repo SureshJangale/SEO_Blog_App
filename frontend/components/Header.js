@@ -46,6 +46,12 @@ const Header = () => {
                   <NavLink>Blogs</NavLink>
                 </Link>
               </NavItem>
+
+              <NavItem>
+                <Link href="/contact">
+                  <NavLink>Contact</NavLink>
+                </Link>
+              </NavItem>
             </React.Fragment>
 
             {!isAuth() && (
@@ -88,9 +94,9 @@ const Header = () => {
             )}
 
             <NavItem>
-              <Link href="/user/crud/blog">
-                <NavLink className="btn btn-primary text-light">Write a blog</NavLink>
-              </Link>
+              <a href="/user/crud/blog" className="btn btn-primary text-light">
+                Write a blog
+              </a>
             </NavItem>
           </Nav>
         </Collapse>
